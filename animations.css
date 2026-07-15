@@ -1,0 +1,452 @@
+/* ===================================================
+   OGUSMÃO DIGITAL — Animation & Interaction Styles
+   =================================================== */
+
+/* ——— Smooth Scroll ——— */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ——— Hide default cursor when custom cursor is active ——— */
+body.has-cursor,
+body.has-cursor * {
+  cursor: none !important;
+}
+
+/* ——— Custom Cursor ——— */
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  background: #D7FF00;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.2s ease, width 0.25s ease, height 0.25s ease, background 0.25s ease;
+  will-change: left, top;
+  mix-blend-mode: difference;
+}
+
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 42px;
+  height: 42px;
+  border: 1.5px solid rgba(215, 255, 0, 0.45);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s ease,
+              background 0.35s ease,
+              opacity 0.3s ease;
+  will-change: left, top, width, height;
+}
+
+/* Cursor: hover over interactive elements */
+.cursor-dot.is-hovering {
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.cursor-ring.is-hovering {
+  width: 64px;
+  height: 64px;
+  border-color: rgba(215, 255, 0, 0.7);
+  background: rgba(215, 255, 0, 0.06);
+}
+
+/* Cursor: click feedback */
+.cursor-ring.is-clicking {
+  width: 32px;
+  height: 32px;
+  border-color: #D7FF00;
+  border-width: 2.5px;
+}
+
+/* Cursor: hidden when leaving viewport */
+.cursor-dot.is-hidden,
+.cursor-ring.is-hidden {
+  opacity: 0 !important;
+}
+
+/* Hide custom cursor on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none !important;
+  }
+  body.has-cursor,
+  body.has-cursor * {
+    cursor: auto !important;
+  }
+}
+
+/* ——— Neon Glow Effect ——— */
+.neon-glow {
+  text-shadow:
+    0 0 10px rgba(215, 255, 0, 0.35),
+    0 0 40px rgba(215, 255, 0, 0.15),
+    0 0 80px rgba(215, 255, 0, 0.06);
+}
+
+/* ——— Grid Background Pattern ——— */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(215, 255, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(215, 255, 0, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ——— Marquee Animation ——— */
+.marquee-track {
+  display: flex;
+  gap: 16px;
+  animation: marquee 45s linear infinite;
+  width: max-content;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* ——— Scroll Reveal Animations ——— */
+.reveal {
+  opacity: 0 !important;
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.reveal-up {
+  transform: translateY(40px) !important;
+}
+
+.reveal.reveal-left {
+  transform: translateX(-40px) !important;
+}
+
+.reveal.reveal-right {
+  transform: translateX(40px) !important;
+}
+
+.reveal.reveal-scale {
+  transform: scale(0.92) !important;
+}
+
+.reveal.reveal-fade {
+  transform: none !important;
+}
+
+.reveal.is-visible {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* ——— Hero Entrance Animations ——— */
+.hero-animate {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: heroEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero-animate:nth-child(1) { animation-delay: 0.1s; }
+.hero-animate:nth-child(2) { animation-delay: 0.25s; }
+.hero-animate:nth-child(3) { animation-delay: 0.4s; }
+.hero-animate:nth-child(4) { animation-delay: 0.55s; }
+.hero-animate:nth-child(5) { animation-delay: 0.7s; }
+
+@keyframes heroEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ——— Button Styles ——— */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  background: #D7FF00;
+  color: #0D0D0D;
+  font-weight: 700;
+  font-size: 14px;
+  border-radius: 12px;
+  border: none;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.25) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 0 25px rgba(215, 255, 0, 0.35),
+    0 12px 35px rgba(215, 255, 0, 0.18);
+}
+
+.btn-primary:hover::before {
+  opacity: 1;
+}
+
+.btn-primary:active {
+  transform: translateY(-1px);
+  box-shadow: 0 0 15px rgba(215, 255, 0, 0.2);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  background: transparent;
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  text-decoration: none;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-outline:hover {
+  border-color: rgba(215, 255, 0, 0.5);
+  background: rgba(215, 255, 0, 0.06);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.btn-outline:active {
+  transform: translateY(-1px);
+}
+
+/* ——— Section Label ——— */
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #D7FF00;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.section-label::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: #D7FF00;
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+/* ——— Testimonial Transitions ——— */
+.testimonial-slide {
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.testimonial-slide.entering {
+  animation: testimonialIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.testimonial-slide.exiting {
+  animation: testimonialOut 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes testimonialIn {
+  from { opacity: 0; transform: translateY(25px) scale(0.97); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes testimonialOut {
+  from { opacity: 1; transform: none; }
+  to   { opacity: 0; transform: translateY(-25px) scale(0.97); }
+}
+
+/* ——— Stats Counter ——— */
+.stat-number {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ——— Header Scroll State ——— */
+header {
+  transition: background 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease !important;
+}
+
+header.is-scrolled {
+  background: rgba(13, 13, 13, 0.88) !important;
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05), 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* ——— Mobile Menu ——— */
+.mobile-menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(13, 13, 13, 0.97);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  z-index: 49;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobile-menu-overlay.is-open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.mobile-menu-overlay .menu-item {
+  font-size: 28px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.7);
+  background: none;
+  border: none;
+  text-decoration: none;
+  transition: color 0.3s, transform 0.3s;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.mobile-menu-overlay.is-open .menu-item {
+  opacity: 1;
+  transform: none;
+  transition: color 0.3s, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+}
+
+.mobile-menu-overlay.is-open .menu-item:nth-child(1) { transition-delay: 0.05s; }
+.mobile-menu-overlay.is-open .menu-item:nth-child(2) { transition-delay: 0.1s; }
+.mobile-menu-overlay.is-open .menu-item:nth-child(3) { transition-delay: 0.15s; }
+.mobile-menu-overlay.is-open .menu-item:nth-child(4) { transition-delay: 0.2s; }
+.mobile-menu-overlay.is-open .menu-item:nth-child(5) { transition-delay: 0.25s; }
+.mobile-menu-overlay.is-open .menu-item:nth-child(6) { transition-delay: 0.3s; }
+.mobile-menu-overlay.is-open .menu-item:nth-child(7) { transition-delay: 0.35s; }
+
+.mobile-menu-overlay .menu-item:hover {
+  color: #D7FF00;
+  transform: translateX(8px);
+}
+
+.mobile-menu-close {
+  position: absolute;
+  top: 18px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: none;
+  color: white;
+  font-size: 24px;
+  transition: border-color 0.3s, color 0.3s;
+}
+
+.mobile-menu-close:hover {
+  border-color: rgba(215, 255, 0, 0.5);
+  color: #D7FF00;
+}
+
+/* ——— Portfolio Item Transitions ——— */
+.portfolio-item {
+  transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.portfolio-item.is-hidden {
+  opacity: 0 !important;
+  transform: scale(0.9) !important;
+  pointer-events: none;
+  position: absolute !important;
+  visibility: hidden;
+}
+
+.portfolio-item.is-visible {
+  opacity: 1 !important;
+  transform: none !important;
+  position: relative !important;
+  visibility: visible;
+}
+
+/* ——— Particle Canvas ——— */
+#inicio canvas {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+}
+
+/* ——— Active Nav Indicator ——— */
+header nav button .nav-indicator {
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ——— Typewriter Cursor Blink ——— */
+.typewriter-cursor {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ——— Service Card Tilt Glow ——— */
+.service-card-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.group:hover .service-card-glow {
+  opacity: 1;
+}

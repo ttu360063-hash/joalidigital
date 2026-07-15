@@ -1,0 +1,355 @@
+/* ===================================================
+   OGUSMÃO DIGITAL — Admin Dashboard Styles
+   =================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+#ogusmao-admin-panel {
+  position: fixed;
+  inset: 0;
+  background-color: #0A0A0A;
+  z-index: 999999;
+  display: flex;
+  font-family: 'Inter', sans-serif;
+  color: #E0E0E0;
+  overflow: hidden;
+}
+
+#ogusmao-admin-panel * {
+  box-sizing: border-box;
+  cursor: auto;
+}
+
+#ogusmao-admin-panel input,
+#ogusmao-admin-panel textarea {
+  cursor: text;
+}
+
+#ogusmao-admin-panel button,
+#ogusmao-admin-panel .oadmin-nav-item,
+#ogusmao-admin-panel .oadmin-btn-exit,
+#ogusmao-admin-panel .oadmin-btn-view {
+  cursor: pointer;
+}
+
+/* Sidebar */
+.oadmin-sidebar {
+  width: 260px;
+  background-color: #121212;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  padding: 24px 0;
+}
+
+.oadmin-brand {
+  padding: 0 24px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.oadmin-brand-icon {
+  width: 32px;
+  height: 32px;
+  background-color: #D7FF00;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0D0D0D;
+  font-weight: 800;
+  font-size: 18px;
+}
+
+.oadmin-brand-text {
+  font-weight: 700;
+  font-size: 16px;
+  color: #FFFFFF;
+}
+
+.oadmin-brand-sub {
+  font-size: 10px;
+  color: #D7FF00;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: block;
+}
+
+.oadmin-nav-group {
+  margin-top: 16px;
+}
+
+.oadmin-nav-title {
+  padding: 0 24px;
+  font-size: 11px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+/* Modal de Login Cursor Fix */
+#admin-modal,
+#admin-modal * {
+  cursor: auto;
+}
+#admin-modal input {
+  cursor: text;
+}
+#admin-modal button {
+  cursor: pointer;
+}
+
+.oadmin-nav-item {
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #A0A0A0;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.oadmin-nav-item:hover {
+  color: #FFFFFF;
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.oadmin-nav-item.active {
+  color: #D7FF00;
+  background-color: rgba(215, 255, 0, 0.05);
+  border-right: 3px solid #D7FF00;
+}
+
+.oadmin-sidebar-footer {
+  margin-top: auto;
+  padding: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.oadmin-btn-exit {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ff4d4d;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Main Content */
+.oadmin-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.oadmin-header {
+  height: 80px;
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.oadmin-header-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #FFF;
+}
+
+.oadmin-header-actions {
+  display: flex;
+  gap: 16px;
+}
+
+.oadmin-btn-view {
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #FFF;
+  cursor: pointer;
+  font-size: 13px;
+  transition: 0.2s;
+}
+.oadmin-btn-view:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.oadmin-content {
+  padding: 40px;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Cards & Forms */
+.oadmin-card {
+  background: #121212;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.oadmin-card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #FFF;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.oadmin-form-group {
+  margin-bottom: 20px;
+}
+
+.oadmin-form-row {
+  display: flex;
+  gap: 20px;
+}
+.oadmin-form-row > .oadmin-form-group {
+  flex: 1;
+}
+
+.oadmin-label {
+  display: block;
+  font-size: 12px;
+  color: #A0A0A0;
+  margin-bottom: 8px;
+}
+
+.oadmin-input, .oadmin-textarea {
+  width: 100%;
+  background: #0A0A0A;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: #FFF;
+  font-family: inherit;
+  font-size: 14px;
+  transition: 0.2s;
+}
+.oadmin-input:focus, .oadmin-textarea:focus {
+  outline: none;
+  border-color: #D7FF00;
+}
+.oadmin-textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Switches / Toggles */
+.oadmin-toggle-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.oadmin-toggle-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.oadmin-toggle-label {
+  font-size: 14px;
+  color: #E0E0E0;
+}
+
+.oadmin-switch {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.oadmin-switch::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  background: #FFF;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.oadmin-switch.active {
+  background: #D7FF00;
+}
+.oadmin-switch.active::after {
+  left: 22px;
+  background: #000;
+}
+
+/* Footer Actions */
+.oadmin-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.oadmin-btn-cancel {
+  padding: 12px 32px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #FFF;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.oadmin-btn-save {
+  padding: 12px 32px;
+  background: #D7FF00;
+  border: none;
+  color: #000;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.oadmin-btn-save:hover {
+  background: #c2e600;
+}
+
+/* Lists (Services, Portfolio) */
+.oadmin-list-item {
+  background: #0A0A0A;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.oadmin-list-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.oadmin-list-row {
+  display: flex;
+  gap: 12px;
+}
