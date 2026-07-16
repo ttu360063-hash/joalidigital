@@ -1,9 +1,4 @@
-export default async function handler(req, res) {
-  // Apenas POST
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
-
+module.exports = async function handler(req, res) {
   // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -13,7 +8,13 @@ export default async function handler(req, res) {
     return res.status(200).end();
   }
 
-  const { secret, content } = req.body;
+  // Apenas POST
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  var secret = req.body && req.body.secret;
+  var content = req.body && req.body.content;
 
   // Validar senha admin
   if (!secret || secret !== process.env.ADMIN_SECRET) {
@@ -24,20 +25,20 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Conteúdo vazio' });
   }
 
-  const token = process.env.GITHUB_TOKEN;
-  const branch = process.env.GITHUB_BRANCH || 'master';
-  const repo = 'ttu360063-hash/joalidigital';
-  const filePath = 'index.html';
+  var token = process.env.GITHUB_TOKEN;
+  var branch = process.env.GITHUB_BRANCH || 'master';
+  var repo = 'ttu360063-hash/joalidigital';
+  var filePath = 'index.html';
 
   if (!token) {
     return res.status(500).json({ error: 'GITHUB_TOKEN não configurado' });
   }
 
-  const apiUrl = `https://api.github.com/repos/${repo}/contents/${filePath}`;
+  var apiUrl = 'https://api.github.com/repos/' + repo + '/contents/' + filePath;
 
   try {
     // 1. Obter SHA atual do arquivo
-    const getRes = await fetch(apiUrl + '?ref=' + branch, {
+    var getRes = await fetch(apiUrl + '?ref=' + branch, {
       headers: {
         'Authorization': 'Bearer ' + token,
         'Accept': 'application/vnd.github.v3+json',
@@ -46,20 +47,20 @@ export default async function handler(req, res) {
     });
 
     if (!getRes.ok) {
-      const errData = await getRes.json().catch(() => ({}));
+      var errData1 = await getRes.json().catch(function() { return {}; });
       return res.status(500).json({ 
         error: 'Erro ao buscar arquivo no GitHub', 
-        details: errData.message || getRes.statusText 
+        details: errData1.message || getRes.statusText 
       });
     }
 
-    const fileData = await getRes.json();
-    const currentSha = fileData.sha;
+    var fileData = await getRes.json();
+    var currentSha = fileData.sha;
 
     // 2. Fazer commit com o conteúdo atualizado
-    const contentBase64 = Buffer.from(content, 'utf-8').toString('base64');
+    var contentBase64 = Buffer.from(content, 'utf-8').toString('base64');
 
-    const putRes = await fetch(apiUrl, {
+    var putRes = await fetch(apiUrl, {
       method: 'PUT',
       headers: {
         'Authorization': 'Bearer ' + token,
@@ -76,14 +77,14 @@ export default async function handler(req, res) {
     });
 
     if (!putRes.ok) {
-      const errData = await putRes.json().catch(() => ({}));
+      var errData2 = await putRes.json().catch(function() { return {}; });
       return res.status(500).json({ 
         error: 'Erro ao fazer commit no GitHub', 
-        details: errData.message || putRes.statusText 
+        details: errData2.message || putRes.statusText 
       });
     }
 
-    const result = await putRes.json();
+    var result = await putRes.json();
 
     return res.status(200).json({ 
       success: true, 
@@ -97,4 +98,4 @@ export default async function handler(req, res) {
       details: err.message 
     });
   }
-}
+};
