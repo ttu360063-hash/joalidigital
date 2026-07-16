@@ -8,16 +8,32 @@
   // Chave de publicação (ADMIN_SECRET do Vercel)
   var _adminSecret = '';
 
-  // --- RESTAURAR DADOS DO LOCALSTORAGE ANTES DE TUDO ---
-  try {
-    var savedContent = localStorage.getItem('ogusmao_site_content');
-    if (savedContent) {
-      var root = document.getElementById('root');
-      if (root) {
-        root.innerHTML = savedContent;
-      }
-    }
-  } catch(e) { console.warn('Erro ao restaurar localStorage:', e); }
+  // --- RESTAURAR DADOS: buscar content.json (remoto) ou localStorage (local) ---
+  (function loadSavedContent() {
+    var root = document.getElementById('root');
+    if (!root) return;
+
+    // 1. Aplicar localStorage imediatamente (preview rápido)
+    try {
+      var local = localStorage.getItem('ogusmao_site_content');
+      if (local) root.innerHTML = local;
+    } catch(e) {}
+
+    // 2. Buscar content.json do servidor (fonte de verdade para todos os dispositivos)
+    fetch('/content.json?t=' + Date.now())
+      .then(function(res) { 
+        if (!res.ok) throw new Error('not found');
+        return res.json(); 
+      })
+      .then(function(data) {
+        if (data && data.rootHTML) {
+          root.innerHTML = data.rootHTML;
+          // Atualizar localStorage também
+          try { localStorage.setItem('ogusmao_site_content', data.rootHTML); } catch(e) {}
+        }
+      })
+      .catch(function() { /* content.json não existe ainda, usar localStorage ou default */ });
+  })();
 
   // --- ATALHO DE TECLADO ---
   document.addEventListener('keydown', function(e) {
