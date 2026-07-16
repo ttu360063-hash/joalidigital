@@ -8,16 +8,7 @@
   // Chave de publicação (ADMIN_SECRET do Vercel)
   var _adminSecret = '';
 
-  // --- RESTAURAR DADOS DO LOCALSTORAGE ANTES DE TUDO ---
-  try {
-    var savedContent = localStorage.getItem('ogusmao_site_content');
-    if (savedContent) {
-      var root = document.getElementById('root');
-      if (root) {
-        root.innerHTML = savedContent;
-      }
-    }
-  } catch(e) { console.warn('Erro ao restaurar localStorage:', e); }
+  // DADOS DO LOCALSTORAGE REMOVIDOS - O site agora carrega sempre a versão real do servidor (GitHub -> Vercel)
 
   // --- ATALHO DE TECLADO ---
   document.addEventListener('keydown', function(e) {
@@ -853,12 +844,7 @@
     var mTrack = clone.querySelector('.marquee-track');
     if (mTrack) mTrack.style.removeProperty('animation');
 
-    // Salvar localmente (preview imediato)
-    try {
-      localStorage.setItem('ogusmao_site_content', clone.innerHTML);
-    } catch(err) {
-      console.warn('localStorage cheio:', err);
-    }
+    // O localStorage foi removido para evitar que o cache local sobrescreva as alterações do servidor
 
     // Publicar via GitHub API
     var btn = document.querySelector('.oadmin-btn-save');
