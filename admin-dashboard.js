@@ -878,26 +878,15 @@
       btn.disabled = true;
     }
 
-    // Reconstruir o HTML completo do documento
-    var fullHTML = document.documentElement.cloneNode(true);
-    var fullRoot = fullHTML.querySelector('#root');
-    if (fullRoot) fullRoot.innerHTML = clone.innerHTML;
-    // Remover o painel admin do HTML que será salvo
-    var adminPanel = fullHTML.querySelector('#ogusmao-admin-panel');
-    if (adminPanel) adminPanel.remove();
-    var adminModal = fullHTML.querySelector('#admin-modal');
-    if (adminModal) adminModal.remove();
-    // Garantir root visível no HTML salvo
-    if (fullRoot) fullRoot.style.display = 'block';
-
-    var htmlContent = '<!DOCTYPE html>\n' + fullHTML.outerHTML;
+    // Enviar apenas o conteúdo do #root (sem scripts/tokens do Cloudflare)
+    var rootContent = clone.innerHTML;
 
     fetch('/api/save', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         secret: _adminSecret,
-        content: htmlContent
+        rootHTML: rootContent
       })
     })
     .then(function(res) { return res.json(); })
