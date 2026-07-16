@@ -910,11 +910,14 @@
           setTimeout(function() { btn.innerHTML = '💾 Salvar alterações'; btn.style.background = '#D7FF00'; }, 4000);
         }
       } else {
+        console.error('Erro ao publicar:', data);
         if (btn) {
-          btn.innerHTML = '❌ Erro: ' + (data.error || 'desconhecido');
+          var errMsg = data.error || 'desconhecido';
+          if (data.details) errMsg += ' — ' + data.details;
+          btn.innerHTML = '❌ ' + errMsg;
           btn.style.background = '#f44336';
           btn.disabled = false;
-          setTimeout(function() { btn.innerHTML = '💾 Salvar alterações'; btn.style.background = '#D7FF00'; }, 5000);
+          setTimeout(function() { btn.innerHTML = '💾 Salvar alterações'; btn.style.background = '#D7FF00'; }, 8000);
         }
       }
     })
