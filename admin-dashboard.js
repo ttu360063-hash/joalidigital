@@ -5,6 +5,9 @@
 (function() {
   'use strict';
 
+  // Chave de publicação (ADMIN_SECRET do Vercel)
+  var _adminSecret = '';
+
   // --- RESTAURAR DADOS DO LOCALSTORAGE ANTES DE TUDO ---
   try {
     var savedContent = localStorage.getItem('ogusmao_site_content');
@@ -50,9 +53,14 @@
       + '<label style="display:block;font-size:12px;color:#A0A0A0;margin-bottom:8px;">Usuário</label>'
       + '<input type="text" id="admin-user" style="width:100%;padding:12px 16px;border-radius:8px;background:#0A0A0A;border:1px solid rgba(255,255,255,0.1);color:white;outline:none;font-size:14px;">'
       + '</div>'
-      + '<div style="text-align:left;margin-bottom:32px;">'
+      + '<div style="text-align:left;margin-bottom:16px;">'
       + '<label style="display:block;font-size:12px;color:#A0A0A0;margin-bottom:8px;">Senha</label>'
       + '<input type="password" id="admin-pass" style="width:100%;padding:12px 16px;border-radius:8px;background:#0A0A0A;border:1px solid rgba(255,255,255,0.1);color:white;outline:none;font-size:14px;">'
+      + '</div>'
+      + '<div style="text-align:left;margin-bottom:32px;">'
+      + '<label style="display:block;font-size:12px;color:#A0A0A0;margin-bottom:8px;">Chave de Publicação</label>'
+      + '<input type="password" id="admin-secret" placeholder="Chave para publicar alterações" style="width:100%;padding:12px 16px;border-radius:8px;background:#0A0A0A;border:1px solid rgba(255,255,255,0.1);color:white;outline:none;font-size:14px;">'
+      + '<p style="font-size:11px;color:#555;margin-top:6px;">A mesma definida como ADMIN_SECRET no Vercel</p>'
       + '</div>'
       + '<button id="admin-login-btn" style="width:100%;padding:14px;border-radius:8px;background:#D7FF00;color:#000;border:none;font-weight:600;cursor:pointer;font-size:14px;">Entrar no Dashboard</button>'
       + '</div>';
@@ -62,7 +70,9 @@
     document.getElementById('admin-login-btn').onclick = function() {
       var u = document.getElementById('admin-user').value;
       var p = document.getElementById('admin-pass').value;
+      var s = document.getElementById('admin-secret').value;
       if (u === 'JoAliDigital' && p === '06072006') {
+        _adminSecret = s;
         modal.remove();
         initDashboard();
       } else {
@@ -843,18 +853,80 @@
     var mTrack = clone.querySelector('.marquee-track');
     if (mTrack) mTrack.style.removeProperty('animation');
 
+    // Salvar localmente (preview imediato)
     try {
       localStorage.setItem('ogusmao_site_content', clone.innerHTML);
-      var btn = document.querySelector('.oadmin-btn-save');
-      if (btn) {
-        var orig = btn.innerHTML;
-        btn.innerHTML = '✅ Salvo com sucesso!';
-        btn.style.background = '#4CAF50';
-        setTimeout(function() { btn.innerHTML = orig; btn.style.background = '#D7FF00'; }, 2000);
-      }
     } catch(err) {
-      alert('Erro ao salvar! O localStorage pode estar cheio.');
+      console.warn('localStorage cheio:', err);
     }
+
+    // Publicar via GitHub API
+    var btn = document.querySelector('.oadmin-btn-save');
+    if (!_adminSecret) {
+      if (btn) {
+        var origLocal = btn.innerHTML;
+        btn.innerHTML = '⚠️ Salvo local (sem chave de publicação)';
+        btn.style.background = '#FF9800';
+        setTimeout(function() { btn.innerHTML = origLocal; btn.style.background = '#D7FF00'; }, 3000);
+      }
+      return;
+    }
+
+    if (btn) {
+      btn.innerHTML = '⏳ Publicando...';
+      btn.style.background = '#666';
+      btn.disabled = true;
+    }
+
+    // Reconstruir o HTML completo do documento
+    var fullHTML = document.documentElement.cloneNode(true);
+    var fullRoot = fullHTML.querySelector('#root');
+    if (fullRoot) fullRoot.innerHTML = clone.innerHTML;
+    // Remover o painel admin do HTML que será salvo
+    var adminPanel = fullHTML.querySelector('#ogusmao-admin-panel');
+    if (adminPanel) adminPanel.remove();
+    var adminModal = fullHTML.querySelector('#admin-modal');
+    if (adminModal) adminModal.remove();
+    // Garantir root visível no HTML salvo
+    if (fullRoot) fullRoot.style.display = 'block';
+
+    var htmlContent = '<!DOCTYPE html>\n' + fullHTML.outerHTML;
+
+    fetch('/api/save', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        secret: _adminSecret,
+        content: htmlContent
+      })
+    })
+    .then(function(res) { return res.json(); })
+    .then(function(data) {
+      if (data.success) {
+        if (btn) {
+          btn.innerHTML = '✅ Publicado! Deploy em ~30s';
+          btn.style.background = '#4CAF50';
+          btn.disabled = false;
+          setTimeout(function() { btn.innerHTML = '💾 Salvar alterações'; btn.style.background = '#D7FF00'; }, 4000);
+        }
+      } else {
+        if (btn) {
+          btn.innerHTML = '❌ Erro: ' + (data.error || 'desconhecido');
+          btn.style.background = '#f44336';
+          btn.disabled = false;
+          setTimeout(function() { btn.innerHTML = '💾 Salvar alterações'; btn.style.background = '#D7FF00'; }, 5000);
+        }
+      }
+    })
+    .catch(function(err) {
+      if (btn) {
+        btn.innerHTML = '❌ Falha na conexão';
+        btn.style.background = '#f44336';
+        btn.disabled = false;
+        setTimeout(function() { btn.innerHTML = '💾 Salvar alterações'; btn.style.background = '#D7FF00'; }, 5000);
+      }
+      console.error('Erro ao publicar:', err);
+    });
   }
 
 })();
