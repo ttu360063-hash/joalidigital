@@ -7,19 +7,19 @@ module.exports = async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   var secret = req.body && req.body.secret;
-  var rootHTML = req.body && req.body.rootHTML;
+  var content = req.body && req.body.content;
 
   if (!secret || secret !== process.env.ADMIN_SECRET) {
     return res.status(401).json({ error: 'Não autorizado' });
   }
-  if (!rootHTML) {
+  if (!content) {
     return res.status(400).json({ error: 'Conteúdo vazio' });
   }
 
   var token = process.env.GITHUB_TOKEN;
   var branch = process.env.GITHUB_BRANCH || 'master';
   var repo = 'ttu360063-hash/joalidigital';
-  var filePath = 'content.json';
+  var filePath = 'index.html';
 
   if (!token) {
     return res.status(500).json({ error: 'GITHUB_TOKEN não configurado' });
@@ -33,31 +33,27 @@ module.exports = async function handler(req, res) {
   };
 
   try {
-    // 1. Tentar obter SHA do content.json (pode não existir ainda)
-    var currentSha = null;
+    // 1. Obter SHA do index.html
     var getRes = await fetch(apiUrl + '?ref=' + branch, { headers: headers });
-    if (getRes.ok) {
-      var fileData = await getRes.json();
-      currentSha = fileData.sha;
+    if (!getRes.ok) {
+      return res.status(500).json({ error: 'Erro ao buscar arquivo no GitHub', details: await getRes.text() });
     }
-    // Se 404, arquivo não existe ainda — vamos criar
+    var fileData = await getRes.json();
+    var currentSha = fileData.sha;
 
-    // 2. Preparar o conteúdo JSON
-    var jsonContent = JSON.stringify({ rootHTML: rootHTML }, null, 0);
-    var contentBase64 = Buffer.from(jsonContent, 'utf-8').toString('base64');
+    // 2. Preparar novo conteúdo
+    var contentBase64 = Buffer.from(content, 'utf-8').toString('base64');
 
-    // 3. Criar ou atualizar o arquivo
-    var putBody = {
-      message: '✏️ Atualização via Painel Admin',
-      content: contentBase64,
-      branch: branch
-    };
-    if (currentSha) putBody.sha = currentSha;
-
+    // 3. Atualizar o arquivo
     var putRes = await fetch(apiUrl, {
       method: 'PUT',
       headers: Object.assign({}, headers, { 'Content-Type': 'application/json' }),
-      body: JSON.stringify(putBody)
+      body: JSON.stringify({
+        message: '✏️ Atualização via Painel Admin',
+        content: contentBase64,
+        sha: currentSha,
+        branch: branch
+      })
     });
 
     if (!putRes.ok) {

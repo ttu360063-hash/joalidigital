@@ -8,32 +8,16 @@
   // Chave de publicação (ADMIN_SECRET do Vercel)
   var _adminSecret = '';
 
-  // --- RESTAURAR DADOS: buscar content.json (remoto) ou localStorage (local) ---
-  (function loadSavedContent() {
-    var root = document.getElementById('root');
-    if (!root) return;
-
-    // 1. Aplicar localStorage imediatamente (preview rápido)
-    try {
-      var local = localStorage.getItem('ogusmao_site_content');
-      if (local) root.innerHTML = local;
-    } catch(e) {}
-
-    // 2. Buscar content.json do servidor (fonte de verdade para todos os dispositivos)
-    fetch('/content.json?t=' + Date.now())
-      .then(function(res) { 
-        if (!res.ok) throw new Error('not found');
-        return res.json(); 
-      })
-      .then(function(data) {
-        if (data && data.rootHTML) {
-          root.innerHTML = data.rootHTML;
-          // Atualizar localStorage também
-          try { localStorage.setItem('ogusmao_site_content', data.rootHTML); } catch(e) {}
-        }
-      })
-      .catch(function() { /* content.json não existe ainda, usar localStorage ou default */ });
-  })();
+  // --- RESTAURAR DADOS DO LOCALSTORAGE ANTES DE TUDO ---
+  try {
+    var savedContent = localStorage.getItem('ogusmao_site_content');
+    if (savedContent) {
+      var root = document.getElementById('root');
+      if (root) {
+        root.innerHTML = savedContent;
+      }
+    }
+  } catch(e) { console.warn('Erro ao restaurar localStorage:', e); }
 
   // --- ATALHO DE TECLADO ---
   document.addEventListener('keydown', function(e) {
@@ -894,15 +878,26 @@
       btn.disabled = true;
     }
 
-    // Enviar apenas o conteúdo do #root (sem scripts/tokens do Cloudflare)
-    var rootContent = clone.innerHTML;
+    // Reconstruir o HTML completo do documento
+    var fullHTML = document.documentElement.cloneNode(true);
+    var fullRoot = fullHTML.querySelector('#root');
+    if (fullRoot) fullRoot.innerHTML = clone.innerHTML;
+    // Remover o painel admin do HTML que será salvo
+    var adminPanel = fullHTML.querySelector('#ogusmao-admin-panel');
+    if (adminPanel) adminPanel.remove();
+    var adminModal = fullHTML.querySelector('#admin-modal');
+    if (adminModal) adminModal.remove();
+    // Garantir root visível no HTML salvo
+    if (fullRoot) fullRoot.style.display = 'block';
+
+    var htmlContent = '<!DOCTYPE html>\n' + fullHTML.outerHTML;
 
     fetch('/api/save', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         secret: _adminSecret,
-        rootHTML: rootContent
+        content: htmlContent
       })
     })
     .then(function(res) { return res.json(); })
