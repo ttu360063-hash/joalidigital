@@ -37,7 +37,7 @@
     modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:100000;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(15px);font-family:Inter,sans-serif;';
 
     modal.innerHTML = '<div style="background:#121212;padding:40px;border-radius:16px;border:1px solid rgba(255,255,255,0.05);width:100%;max-width:400px;text-align:center;">'
-      + '<div style="width:48px;height:48px;background:#D7FF00;border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-weight:800;color:#000;font-size:24px;">O</div>'
+      + '<div style="width:64px;height:64px;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;"><img src="./assets/logo-icon.png" alt="Ogusmão Digital" style="max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 0 16px rgba(46,204,64,0.45));"></div>'
       + '<h2 style="color:white;margin-bottom:8px;font-size:20px;">Ogusmão Admin</h2>'
       + '<p style="color:#666;margin-bottom:32px;font-size:14px;">Acesso restrito ao painel de controle</p>'
       + '<div style="text-align:left;margin-bottom:16px;">'
@@ -80,7 +80,7 @@
     dashboard.id = 'ogusmao-admin-panel';
 
     dashboard.innerHTML = '<div class="oadmin-sidebar">'
-      + '<div class="oadmin-brand"><div class="oadmin-brand-icon">O</div><div><div class="oadmin-brand-text">Ogusmão</div><div class="oadmin-brand-sub">Digital Admin</div></div></div>'
+      + '<div class="oadmin-brand" style="padding:18px 20px 22px;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;"><img src="./assets/logo.png" alt="Ogusmão Digital" style="height:32px;width:auto;max-width:100%;object-fit:contain;"></div>'
       + '<div class="oadmin-nav-group">'
       + '<div class="oadmin-nav-title">Gerenciar Conteúdo</div>'
       + '<div class="oadmin-nav-item active" data-tab="hero">✨ Início (Hero)</div>'
