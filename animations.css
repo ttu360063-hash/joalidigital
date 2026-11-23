@@ -20,7 +20,7 @@ body.has-cursor * {
   left: 0;
   width: 7px;
   height: 7px;
-  background: #D7FF00;
+  background: #44D62C;
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
@@ -36,7 +36,7 @@ body.has-cursor * {
   left: 0;
   width: 42px;
   height: 42px;
-  border: 1.5px solid rgba(215, 255, 0, 0.45);
+  border: 1.5px solid rgba(68, 214, 44, 0.45);
   border-radius: 50%;
   pointer-events: none;
   z-index: 9998;
@@ -59,15 +59,15 @@ body.has-cursor * {
 .cursor-ring.is-hovering {
   width: 64px;
   height: 64px;
-  border-color: rgba(215, 255, 0, 0.7);
-  background: rgba(215, 255, 0, 0.06);
+  border-color: rgba(68, 214, 44, 0.7);
+  background: rgba(68, 214, 44, 0.06);
 }
 
 /* Cursor: click feedback */
 .cursor-ring.is-clicking {
   width: 32px;
   height: 32px;
-  border-color: #D7FF00;
+  border-color: #44D62C;
   border-width: 2.5px;
 }
 
@@ -92,16 +92,16 @@ body.has-cursor * {
 /* ——— Neon Glow Effect ——— */
 .neon-glow {
   text-shadow:
-    0 0 10px rgba(215, 255, 0, 0.35),
-    0 0 40px rgba(215, 255, 0, 0.15),
-    0 0 80px rgba(215, 255, 0, 0.06);
+    0 0 10px rgba(68, 214, 44, 0.35),
+    0 0 40px rgba(68, 214, 44, 0.15),
+    0 0 80px rgba(68, 214, 44, 0.06);
 }
 
 /* ——— Grid Background Pattern ——— */
 .grid-bg {
   background-image:
-    linear-gradient(rgba(215, 255, 0, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(215, 255, 0, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(68, 214, 44, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(68, 214, 44, 0.03) 1px, transparent 1px);
   background-size: 60px 60px;
 }
 
@@ -188,8 +188,8 @@ body.has-cursor * {
   align-items: center;
   gap: 8px;
   padding: 12px 28px;
-  background: #D7FF00;
-  color: #0D0D0D;
+  background: linear-gradient(135deg, #58E22C 0%, #35BC1E 100%);
+  color: #050505;
   font-weight: 700;
   font-size: 14px;
   border-radius: 12px;
@@ -197,6 +197,7 @@ body.has-cursor * {
   text-decoration: none;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 0 20px rgba(68, 214, 44, 0.22);
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
               box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -213,8 +214,8 @@ body.has-cursor * {
 .btn-primary:hover {
   transform: translateY(-3px);
   box-shadow:
-    0 0 25px rgba(215, 255, 0, 0.35),
-    0 12px 35px rgba(215, 255, 0, 0.18);
+    0 0 25px rgba(68, 214, 44, 0.35),
+    0 12px 35px rgba(68, 214, 44, 0.18);
 }
 
 .btn-primary:hover::before {
@@ -223,7 +224,7 @@ body.has-cursor * {
 
 .btn-primary:active {
   transform: translateY(-1px);
-  box-shadow: 0 0 15px rgba(215, 255, 0, 0.2);
+  box-shadow: 0 0 15px rgba(68, 214, 44, 0.2);
 }
 
 .btn-outline {
@@ -242,8 +243,8 @@ body.has-cursor * {
 }
 
 .btn-outline:hover {
-  border-color: rgba(215, 255, 0, 0.5);
-  background: rgba(215, 255, 0, 0.06);
+  border-color: rgba(68, 214, 44, 0.5);
+  background: rgba(68, 214, 44, 0.06);
   transform: translateY(-3px);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
@@ -257,7 +258,7 @@ body.has-cursor * {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: #D7FF00;
+  color: #44D62C;
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
@@ -268,7 +269,7 @@ body.has-cursor * {
   content: '';
   width: 6px;
   height: 6px;
-  background: #D7FF00;
+  background: #44D62C;
   border-radius: 50%;
   animation: pulse 2s ease-in-out infinite;
 }
@@ -369,7 +370,7 @@ header.is-scrolled {
 .mobile-menu-overlay.is-open .menu-item:nth-child(7) { transition-delay: 0.35s; }
 
 .mobile-menu-overlay .menu-item:hover {
-  color: #D7FF00;
+  color: #44D62C;
   transform: translateX(8px);
 }
 
@@ -391,8 +392,8 @@ header.is-scrolled {
 }
 
 .mobile-menu-close:hover {
-  border-color: rgba(215, 255, 0, 0.5);
-  color: #D7FF00;
+  border-color: rgba(68, 214, 44, 0.5);
+  color: #44D62C;
 }
 
 /* ——— Portfolio Item Transitions ——— */

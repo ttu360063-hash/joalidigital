@@ -8,8 +8,8 @@
   'use strict';
 
   // ── Constantes ────────────────────────────────────
-  const ACCENT = '#D7FF00';
-  const ACCENT_RGB = [215, 255, 0];
+  const ACCENT = '#44D62C';
+  const ACCENT_RGB = [68, 214, 44];
   const TYPEWRITER_WORDS = ['conversões.', 'resultados.', 'vendas.', 'clientes.', 'lucro.'];
   const TYPEWRITER_SPEED = 80;       // ms entre caracteres (digitando)
   const TYPEWRITER_DELETE = 50;      // ms entre caracteres (apagando)
@@ -509,14 +509,14 @@
       statElements.push(
         heroSection.querySelector('[data-admin="stat-empresas"]'),
         heroSection.querySelector('[data-admin="stat-satisfacao"]'),
-        ...Array.from(heroSection.querySelectorAll('.text-\\[\\#D7FF00\\]')).filter(el => el.textContent.includes('+300%'))
+        ...Array.from(heroSection.querySelectorAll('.text-\\[\\#44D62C\\]')).filter(el => el.textContent.includes('+300%'))
       );
     }
 
     // 2. Números da seção escura (4 blocos)
     if (darkStatsSection) {
       statElements.push(
-        ...darkStatsSection.querySelectorAll('.font-black.text-\\[\\#D7FF00\\]')
+        ...darkStatsSection.querySelectorAll('.font-black.text-\\[\\#44D62C\\]')
       );
     }
 
@@ -638,7 +638,7 @@
 
         if (textEl) textEl.textContent = testimonial.text;
         if (nameEl) nameEl.textContent = testimonial.name;
-        if (roleEl) roleEl.innerHTML = `${testimonial.role} · <span class="text-[#D7FF00]">${testimonial.company}</span>`;
+        if (roleEl) roleEl.innerHTML = `${testimonial.role} · <span class="text-[#44D62C]">${testimonial.company}</span>`;
         if (emojiEl) emojiEl.textContent = testimonial.emoji;
 
         // Animar entrada
@@ -661,7 +661,7 @@
         if (i === activeIndex) {
           dot.className = dot.className
             .replace('w-1.5', 'w-8')
-            .replace('bg-white/20', 'bg-[#D7FF00]');
+            .replace('bg-white/20', 'bg-[#44D62C]');
           if (!dot.className.includes('w-8')) {
             dot.classList.remove('w-1.5');
             dot.classList.add('w-8');
@@ -769,7 +769,7 @@
         navButtons.forEach((btn, i) => {
           if (i === activeIndex) {
             btn.className = btn.className
-              .replace('text-white/70', 'text-[#D7FF00]')
+              .replace('text-white/70', 'text-[#44D62C]')
               .replace('hover:text-white', '');
             // Mostrar indicador
             const indicator = btn.querySelector('span');
@@ -777,7 +777,7 @@
           } else {
             if (!btn.className.includes('text-white/70')) {
               btn.className = btn.className
-                .replace('text-[#D7FF00]', 'text-white/70');
+                .replace('text-[#44D62C]', 'text-white/70');
               if (!btn.className.includes('hover:text-white')) {
                 btn.className += ' hover:text-white';
               }
@@ -985,7 +985,7 @@
         // Efeito de glow que segue o cursor
         const glowEl = card.querySelector('[class*="box-shadow"]') || card.querySelector('.absolute.inset-0.opacity-0');
         if (glowEl) {
-          glowEl.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(215,255,0,0.08), transparent 60%)`;
+          glowEl.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(68, 214, 44,0.08), transparent 60%)`;
           glowEl.style.opacity = '1';
         }
       });
@@ -1011,14 +1011,14 @@
       top: 0;
       left: 0;
       height: 2px;
-      background: linear-gradient(90deg, #D7FF00, rgba(215,255,0,0.6));
+      background: linear-gradient(90deg, #44D62C, rgba(68, 214, 44,0.6));
       z-index: 9999;
       transform-origin: left;
       transform: scaleX(0);
       transition: none;
       pointer-events: none;
       width: 100%;
-      box-shadow: 0 0 8px rgba(215,255,0,0.4);
+      box-shadow: 0 0 8px rgba(68, 214, 44,0.4);
     `;
     document.body.appendChild(progressBar);
 
@@ -1095,7 +1095,7 @@
     // Log de inicialização
     console.log(
       '%c⚡ Ogusmão Digital %c— Animations loaded',
-      'color: #D7FF00; font-weight: bold; font-size: 14px; background: #0D0D0D; padding: 4px 8px; border-radius: 4px;',
+      'color: #44D62C; font-weight: bold; font-size: 14px; background: #0D0D0D; padding: 4px 8px; border-radius: 4px;',
       'color: #888; font-size: 12px;'
     );
   }

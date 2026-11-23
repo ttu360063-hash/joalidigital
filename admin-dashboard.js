@@ -53,7 +53,7 @@
       + '<input type="password" id="admin-secret" placeholder="Chave para publicar alterações" style="width:100%;padding:12px 16px;border-radius:8px;background:#0A0A0A;border:1px solid rgba(255,255,255,0.1);color:white;outline:none;font-size:14px;">'
       + '<p style="font-size:11px;color:#555;margin-top:6px;">A mesma definida como ADMIN_SECRET no Vercel</p>'
       + '</div>'
-      + '<button id="admin-login-btn" style="width:100%;padding:14px;border-radius:8px;background:#D7FF00;color:#000;border:none;font-weight:600;cursor:pointer;font-size:14px;">Entrar no Dashboard</button>'
+      + '<button id="admin-login-btn" style="width:100%;padding:14px;border-radius:8px;background:#44D62C;color:#000;border:none;font-weight:600;cursor:pointer;font-size:14px;">Entrar no Dashboard</button>'
       + '</div>';
 
     document.body.appendChild(modal);
@@ -353,7 +353,7 @@
     var darkStatsSection = document.querySelector('section.py-20.bg-\\[\\#1A1A1A\\]');
     var darkStats = [];
     if (darkStatsSection) {
-      var numberEls = darkStatsSection.querySelectorAll('.font-black.text-\\[\\#D7FF00\\]');
+      var numberEls = darkStatsSection.querySelectorAll('.font-black.text-\\[\\#44D62C\\]');
       var labelEls = darkStatsSection.querySelectorAll('.text-white\\/50.text-sm');
       for (var j = 0; j < 4; j++) {
         if (numberEls[j] || labelEls[j]) {
@@ -853,7 +853,7 @@
         var origLocal = btn.innerHTML;
         btn.innerHTML = '⚠️ Salvo local (sem chave de publicação)';
         btn.style.background = '#FF9800';
-        setTimeout(function() { btn.innerHTML = origLocal; btn.style.background = '#D7FF00'; }, 3000);
+        setTimeout(function() { btn.innerHTML = origLocal; btn.style.background = '#44D62C'; }, 3000);
       }
       return;
     }
@@ -893,7 +893,7 @@
           btn.innerHTML = '✅ Publicado! Deploy em ~30s';
           btn.style.background = '#4CAF50';
           btn.disabled = false;
-          setTimeout(function() { btn.innerHTML = '💾 Salvar alterações'; btn.style.background = '#D7FF00'; }, 4000);
+          setTimeout(function() { btn.innerHTML = '💾 Salvar alterações'; btn.style.background = '#44D62C'; }, 4000);
         }
       } else {
         console.error('Erro ao publicar:', data);
@@ -903,7 +903,7 @@
           btn.innerHTML = '❌ ' + errMsg;
           btn.style.background = '#f44336';
           btn.disabled = false;
-          setTimeout(function() { btn.innerHTML = '💾 Salvar alterações'; btn.style.background = '#D7FF00'; }, 8000);
+          setTimeout(function() { btn.innerHTML = '💾 Salvar alterações'; btn.style.background = '#44D62C'; }, 8000);
         }
       }
     })
@@ -912,7 +912,7 @@
         btn.innerHTML = '❌ Falha na conexão';
         btn.style.background = '#f44336';
         btn.disabled = false;
-        setTimeout(function() { btn.innerHTML = '💾 Salvar alterações'; btn.style.background = '#D7FF00'; }, 5000);
+        setTimeout(function() { btn.innerHTML = '💾 Salvar alterações'; btn.style.background = '#44D62C'; }, 5000);
       }
       console.error('Erro ao publicar:', err);
     });

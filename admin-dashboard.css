@@ -52,7 +52,7 @@
 .oadmin-brand-icon {
   width: 32px;
   height: 32px;
-  background-color: #D7FF00;
+  background-color: #44D62C;
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -70,7 +70,7 @@
 
 .oadmin-brand-sub {
   font-size: 10px;
-  color: #D7FF00;
+  color: #44D62C;
   text-transform: uppercase;
   letter-spacing: 1px;
   display: block;
@@ -120,9 +120,9 @@
 }
 
 .oadmin-nav-item.active {
-  color: #D7FF00;
-  background-color: rgba(215, 255, 0, 0.05);
-  border-right: 3px solid #D7FF00;
+  color: #44D62C;
+  background-color: rgba(68, 214, 44, 0.05);
+  border-right: 3px solid #44D62C;
 }
 
 .oadmin-sidebar-footer {
@@ -241,7 +241,7 @@
 }
 .oadmin-input:focus, .oadmin-textarea:focus {
   outline: none;
-  border-color: #D7FF00;
+  border-color: #44D62C;
 }
 .oadmin-textarea {
   min-height: 100px;
@@ -289,7 +289,7 @@
 }
 
 .oadmin-switch.active {
-  background: #D7FF00;
+  background: #44D62C;
 }
 .oadmin-switch.active::after {
   left: 22px;
@@ -316,7 +316,7 @@
 
 .oadmin-btn-save {
   padding: 12px 32px;
-  background: #D7FF00;
+  background: #44D62C;
   border: none;
   color: #000;
   border-radius: 8px;

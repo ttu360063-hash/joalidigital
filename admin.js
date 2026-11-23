@@ -39,21 +39,21 @@
     `;
 
     modal.innerHTML = `
-      <div style="background: #1A1A1A; padding: 40px; border-radius: 20px; border: 1px solid rgba(215,255,0,0.3); box-shadow: 0 0 50px rgba(215,255,0,0.1); width: 100%; max-width: 400px; text-align: center; transform: scale(0.9); animation: modalIn 0.3s forwards;">
+      <div style="background: #1A1A1A; padding: 40px; border-radius: 20px; border: 1px solid rgba(68, 214, 44,0.3); box-shadow: 0 0 50px rgba(68, 214, 44,0.1); width: 100%; max-width: 400px; text-align: center; transform: scale(0.9); animation: modalIn 0.3s forwards;">
         <h2 style="color: white; margin-bottom: 8px; font-size: 24px;">Área Administrativa</h2>
         <p style="color: rgba(255,255,255,0.5); margin-bottom: 24px; font-size: 14px;">Insira suas credenciais para editar o site</p>
         <input type="text" id="admin-user" placeholder="Usuário" style="width: 100%; padding: 14px; margin-bottom: 16px; border-radius: 10px; background: #0D0D0D; border: 1px solid rgba(255,255,255,0.1); color: white; font-family: inherit; outline: none;" autocomplete="off">
         <input type="password" id="admin-pass" placeholder="Senha" style="width: 100%; padding: 14px; margin-bottom: 24px; border-radius: 10px; background: #0D0D0D; border: 1px solid rgba(255,255,255,0.1); color: white; font-family: inherit; outline: none;">
         <div style="display: flex; gap: 12px;">
           <button id="admin-cancel" style="flex: 1; padding: 14px; border-radius: 10px; background: rgba(255,255,255,0.05); color: white; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; transition: 0.2s;">Cancelar</button>
-          <button id="admin-login" style="flex: 1; padding: 14px; border-radius: 10px; background: #D7FF00; color: #0D0D0D; border: none; font-weight: bold; cursor: pointer; transition: 0.2s;">Acessar</button>
+          <button id="admin-login" style="flex: 1; padding: 14px; border-radius: 10px; background: #44D62C; color: #0D0D0D; border: none; font-weight: bold; cursor: pointer; transition: 0.2s;">Acessar</button>
         </div>
       </div>
       <style>
         @keyframes modalIn { to { transform: scale(1); } }
-        #admin-user:focus, #admin-pass:focus { border-color: #D7FF00 !important; }
+        #admin-user:focus, #admin-pass:focus { border-color: #44D62C !important; }
         #admin-cancel:hover { background: rgba(255,255,255,0.1) !important; }
-        #admin-login:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(215,255,0,0.3); }
+        #admin-login:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(68, 214, 44,0.3); }
       </style>
     `;
     document.body.appendChild(modal);
@@ -86,8 +86,8 @@
     style.id = 'admin-highlight-styles';
     style.innerHTML = `
       * { cursor: auto !important; }
-      .admin-editable { outline: 1px dashed rgba(215,255,0,0.3); outline-offset: 4px; transition: outline 0.2s; cursor: text !important; }
-      .admin-editable:hover { outline: 2px solid #D7FF00; background: rgba(215,255,0,0.05); }
+      .admin-editable { outline: 1px dashed rgba(68, 214, 44,0.3); outline-offset: 4px; transition: outline 0.2s; cursor: text !important; }
+      .admin-editable:hover { outline: 2px solid #44D62C; background: rgba(68, 214, 44,0.05); }
       .admin-editable:focus { outline: 2px solid #00D4FF; background: rgba(0,212,255,0.05); }
       .admin-link { position: relative; cursor: pointer !important; }
       .admin-link::after { content: '🔗'; position: absolute; top: -10px; right: -10px; font-size: 12px; pointer-events: none; opacity: 0.7; }
@@ -99,9 +99,9 @@
     toolbar.id = 'admin-toolbar';
     toolbar.style.cssText = `
       position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
-      background: #D7FF00; color: #0D0D0D; padding: 12px 24px; border-radius: 50px;
+      background: #44D62C; color: #0D0D0D; padding: 12px 24px; border-radius: 50px;
       font-weight: bold; font-family: 'Space Grotesk', sans-serif; z-index: 100000;
-      box-shadow: 0 10px 40px rgba(215,255,0,0.4); display: flex; align-items: center; gap: 20px;
+      box-shadow: 0 10px 40px rgba(68, 214, 44,0.4); display: flex; align-items: center; gap: 20px;
     `;
     toolbar.innerHTML = `
       <div style="display: flex; align-items: center; gap: 8px;">
@@ -205,9 +205,9 @@
       
       const successModal = document.createElement('div');
       successModal.style.cssText = `
-        position: fixed; top: 20px; right: 20px; background: #D7FF00; color: #0D0D0D;
+        position: fixed; top: 20px; right: 20px; background: #44D62C; color: #0D0D0D;
         padding: 16px 24px; border-radius: 12px; font-weight: bold; z-index: 100000;
-        box-shadow: 0 4px 15px rgba(215,255,0,0.4); animation: slideIn 0.3s forwards;
+        box-shadow: 0 4px 15px rgba(68, 214, 44,0.4); animation: slideIn 0.3s forwards;
         font-family: 'Space Grotesk', sans-serif;
       `;
       successModal.innerHTML = '✅ Alterações salvas com sucesso!';
